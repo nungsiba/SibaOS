@@ -1,0 +1,65 @@
+name: Build Siba OS ISO
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: siba-os-project/siba-os
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: Free disk space
+        working-directory: .
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android
+          df -h
+
+      - uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y debootstrap xorriso squashfs-tools \
+            grub-pc-bin grub-efi-amd64-bin mtools dosfstools syslinux isolinux \
+            debian-archive-keyring curl gnupg wget
+          wget -O /tmp/live-build.deb https://deb.debian.org/debian/pool/main/l/live-build/live-build_20230502_all.deb
+          sudo apt-get install -y /tmp/live-build.deb
+          lb --version
+
+      - name: Make scripts executable
+        run: |
+          chmod +x auto/config auto/build auto/clean build-local.sh
+          chmod +x config/hooks/live/*.hook.chroot
+          chmod +x config/includes.chroot/usr/local/bin/*
+
+      - name: Configure
+        run: sudo ./auto/config
+
+      - name: Build ISO
+        run: sudo ./auto/build
+
+      - name: Collect ISO
+        run: |
+          mkdir -p out
+          sudo mv ./*.iso out/
+          cd out
+          sha256sum *.iso | tee SHA256SUMS
+          ls -lh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: siba-os-iso
+          path: siba-os-project/siba-os/out/*
+          if-no-files-found: error
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: siba-os-project/siba-os/build.log
+          if-no-files-found: ignore
