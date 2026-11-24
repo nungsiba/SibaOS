@@ -1,0 +1,25 @@
+#!/bin/sh
+# Siba OS welcome window (first run and from the dock).
+GUIDE=/usr/share/doc/siba-os/USER_GUIDE.md
+
+while true; do
+  CHOICE=$(zenity --list --title="Welcome to Siba OS" --width=480 --height=420 \
+    --text="Built by Sorokhaibam Nungsiba Singh\nA clean, fast system for coding and making software." \
+    --column="Action" \
+    "Open the User Guide" \
+    "Open VS Code" \
+    "Open Terminal" \
+    "Install this system to disk" \
+    "Show system info" \
+    "Close") || exit 0
+
+  case "$CHOICE" in
+    "Open the User Guide") gnome-text-editor "$GUIDE" & ;;
+    "Open VS Code") code & ;;
+    "Open Terminal") gnome-terminal & ;;
+    "Install this system to disk")
+        zenity --info --width=420 --text="Use the 'Install Siba OS' option from the boot menu of the USB stick (graphical installer)." ;;
+    "Show system info") zenity --info --width=420 --text="$(siba-info)" ;;
+    *) exit 0 ;;
+  esac
+done

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Siba Welcome
+Comment=Guide, tools and system info for Siba OS
+Exec=/usr/local/bin/siba-welcome
+Icon=help-about
+Terminal=false
+Categories=System;Utility;
