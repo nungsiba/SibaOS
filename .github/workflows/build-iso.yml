@@ -3,22 +3,29 @@ name: Build Siba OS ISO
 on:
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: siba-os-project/siba-os
-
 jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     steps:
       - name: Free disk space
-        working-directory: .
         run: |
           sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android
           df -h
 
       - uses: actions/checkout@v4
+
+      - name: Locate project folder
+        run: |
+          CFG=$(find . -type f -path '*/auto/config' -not -path './.git/*' | head -1)
+          if [ -z "$CFG" ]; then
+            echo "auto/config not found. Repo contents:"
+            find . -maxdepth 4 -not -path './.git/*' | head -80
+            exit 1
+          fi
+          P=$(dirname "$(dirname "$CFG")")
+          echo "Project folder: $P"
+          echo "PROJECT=$P" >> "$GITHUB_ENV"
 
       - name: Install build tools
         run: |
@@ -32,18 +39,24 @@ jobs:
 
       - name: Make scripts executable
         run: |
+          cd "$PROJECT"
           chmod +x auto/config auto/build auto/clean build-local.sh
           chmod +x config/hooks/live/*.hook.chroot
           chmod +x config/includes.chroot/usr/local/bin/*
 
       - name: Configure
-        run: sudo ./auto/config
+        run: |
+          cd "$PROJECT"
+          sudo ./auto/config
 
       - name: Build ISO
-        run: sudo ./auto/build
+        run: |
+          cd "$PROJECT"
+          sudo ./auto/build
 
       - name: Collect ISO
         run: |
+          cd "$PROJECT"
           mkdir -p out
           sudo mv ./*.iso out/
           cd out
@@ -53,7 +66,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: siba-os-iso
-          path: siba-os-project/siba-os/out/*
+          path: ${{ env.PROJECT }}/out/*
           if-no-files-found: error
 
       - name: Upload build log
@@ -61,5 +74,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-log
-          path: siba-os-project/siba-os/build.log
+          path: ${{ env.PROJECT }}/build.log
           if-no-files-found: ignore
