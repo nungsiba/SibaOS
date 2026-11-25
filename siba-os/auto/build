@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Siba OS - live-build build wrapper
-set -e
+set -eo pipefail
 lb build noauto "${@}" 2>&1 | tee build.log
