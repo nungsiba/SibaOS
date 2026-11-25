@@ -47,5 +47,3 @@ xserver-xorg
 xserver-xorg-input-libinput
 libgl1-mesa-dri
 mesa-vulkan-drivers
-virtualbox-guest-utils
-virtualbox-guest-x11
