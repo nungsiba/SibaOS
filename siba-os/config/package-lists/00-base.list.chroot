@@ -47,3 +47,6 @@ xserver-xorg
 xserver-xorg-input-libinput
 libgl1-mesa-dri
 mesa-vulkan-drivers
+plymouth
+plymouth-themes
+pulseaudio-utils

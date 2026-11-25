@@ -1,0 +1,5 @@
+#!/bin/sh
+# Activate the Siba OS boot animation (Plymouth theme).
+set -e
+plymouth-set-default-theme siba
+update-initramfs -u

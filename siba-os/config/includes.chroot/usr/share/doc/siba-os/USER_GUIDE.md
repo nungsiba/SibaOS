@@ -150,3 +150,18 @@ Podman works without a background service and uses less memory. Most `docker` co
 - **Built by:** Sorokhaibam Nungsiba Singh
 - **Build history:** see `BUILD_HISTORY.md`
 - Run `siba-info` for a live summary of your machine.
+
+---
+
+## 9. Startup sound
+Siba OS plays a short classical chime (the opening of Bach's Prelude in C major, public domain) when the desktop loads.
+To turn it off: open **Startup Applications** (or Tweaks, Startup Applications) and remove **Siba Startup Sound**, or delete `~/.config/autostart/siba-startup-sound.desktop`.
+
+---
+
+## 10. Apps, office and messaging
+- **Software (app store):** open **Software** from the dock to find and install apps. It uses Flathub and the Debian repositories. You need an internet connection.
+- **LibreOffice:** Writer (documents), Calc (spreadsheets), Impress (presentations) and Draw. They open and save Microsoft Office files (`.docx`, `.xlsx`, `.pptx`) and PDFs.
+- **WhatsApp:** opens WhatsApp Web in its own window. On first use, link it to your phone by scanning the QR code in WhatsApp, under Linked devices.
+- **Gmail:** opens Gmail in its own window. Sign in with your Google account.
+- WhatsApp and Gmail need an internet connection and use Chromium for their windows. Firefox stays your main browser.

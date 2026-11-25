@@ -1,0 +1,10 @@
+# App store, office suite and web-app browser
+flatpak
+gnome-software
+gnome-software-plugin-flatpak
+libreoffice-writer
+libreoffice-calc
+libreoffice-impress
+libreoffice-draw
+libreoffice-gtk3
+chromium

@@ -19,8 +19,8 @@ On Debian/Ubuntu (or WSL2): `sh build-local.sh`
 | Path | Purpose |
 |---|---|
 | `auto/config` | live-build settings (distro, boot, ISO name) |
-| `config/package-lists/` | packages: base, desktop, developer tools |
-| `config/hooks/live/` | VS Code install and OS identity |
+| `config/package-lists/` | packages: base, desktop, developer tools, apps (store, LibreOffice, Chromium) |
+| `config/hooks/live/` | VS Code install, OS identity, boot animation, app store source |
 | `config/includes.chroot/` | files copied into the OS: theme, wallpapers, welcome app |
 | `docs/USER_GUIDE.md` | user guide shipped inside the OS |
 | `.github/workflows/build-iso.yml` | cloud ISO build |

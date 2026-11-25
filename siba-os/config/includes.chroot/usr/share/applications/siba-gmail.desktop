@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Gmail
+Comment=Gmail in its own window
+Exec=chromium --app=https://mail.google.com/ --no-first-run --class=siba-gmail
+Icon=internet-mail
+StartupWMClass=siba-gmail
+Terminal=false
+Categories=Network;Email;

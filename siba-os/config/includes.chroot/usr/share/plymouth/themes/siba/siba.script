@@ -1,0 +1,69 @@
+# Siba OS boot animation
+# Built by Sorokhaibam Nungsiba Singh
+
+Window.SetBackgroundTopColor(0.07, 0.09, 0.12);
+Window.SetBackgroundBottomColor(0.07, 0.09, 0.12);
+
+sw = Window.GetWidth();
+sh = Window.GetHeight();
+
+logo_image = Image("logo.png");
+logo_sprite = Sprite(logo_image);
+logo_x = sw / 2 - logo_image.GetWidth() / 2;
+logo_y = sh / 2 - logo_image.GetHeight() / 2 - 50;
+logo_sprite.SetPosition(logo_x, logo_y, 10);
+logo_sprite.SetOpacity(0);
+
+word_image = Image("wordmark.png");
+word_sprite = Sprite(word_image);
+word_sprite.SetPosition(sw / 2 - word_image.GetWidth() / 2, logo_y + logo_image.GetHeight() + 10, 10);
+word_sprite.SetOpacity(0);
+
+track_image = Image("track.png");
+track_sprite = Sprite(track_image);
+bar_x = sw / 2 - track_image.GetWidth() / 2;
+bar_y = logo_y + logo_image.GetHeight() + 100;
+track_sprite.SetPosition(bar_x, bar_y, 10);
+track_sprite.SetOpacity(0);
+
+fill_original = Image("fill.png");
+fill_sprite = Sprite();
+fill_sprite.SetPosition(bar_x, bar_y, 11);
+fill_sprite.SetOpacity(0);
+
+counter = 0;
+progress = 0;
+
+fun refresh_callback() {
+  counter++;
+  t = counter / 50.0;
+
+  # logo fades in, then breathes gently
+  if (t < 1.0) logo_sprite.SetOpacity(t);
+  else logo_sprite.SetOpacity(0.88 + 0.12 * Math.Sin((t - 1.0) * 3.0));
+
+  # wordmark and bar fade in after the logo
+  if (t > 0.6 && t < 1.4) {
+    word_sprite.SetOpacity((t - 0.6) / 0.8);
+  } else if (t >= 1.4) {
+    word_sprite.SetOpacity(1);
+  }
+  if (t > 1.2 && t < 1.8) {
+    track_sprite.SetOpacity((t - 1.2) / 0.6);
+    fill_sprite.SetOpacity((t - 1.2) / 0.6);
+  } else if (t >= 1.8) {
+    track_sprite.SetOpacity(1);
+    fill_sprite.SetOpacity(1);
+  }
+
+  # bar width follows boot progress, never below a small start
+  w = Math.Int(fill_original.GetWidth() * (0.04 + 0.96 * progress));
+  if (w < 4) w = 4;
+  fill_sprite.SetImage(fill_original.Scale(w, fill_original.GetHeight()));
+}
+Plymouth.SetRefreshFunction(refresh_callback);
+
+fun boot_progress_callback(duration, p) {
+  progress = p;
+}
+Plymouth.SetBootProgressFunction(boot_progress_callback);

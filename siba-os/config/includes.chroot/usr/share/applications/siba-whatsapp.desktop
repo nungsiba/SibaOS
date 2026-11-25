@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=WhatsApp
+Comment=WhatsApp Web in its own window
+Exec=chromium --app=https://web.whatsapp.com/ --no-first-run --class=siba-whatsapp
+Icon=internet-chat
+StartupWMClass=siba-whatsapp
+Terminal=false
+Categories=Network;InstantMessaging;

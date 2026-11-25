@@ -1,0 +1,6 @@
+#!/bin/sh
+# Add the Flathub app source to the Software store. Needs network at build time.
+# If it cannot be added now, Siba OS adds it at first login (see siba-flathub.desktop).
+flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo \
+  || echo "Flathub could not be added at build time; it will be added at first login."
+exit 0

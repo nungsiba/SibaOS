@@ -16,7 +16,9 @@ Built by Sorokhaibam Nungsiba Singh.
 - Identity: custom `/etc/os-release`, welcome app (`siba-welcome`), system info tool (`siba-info`).
 - Documentation: full user guide at `/usr/share/doc/siba-os/USER_GUIDE.md` and `docs/USER_GUIDE.md`.
 - Build system: `live-build` project with a GitHub Actions workflow that produces the ISO.
+- Boot animation (Plymouth theme "siba") and a classical startup chime (opening of J.S. Bach's Prelude in C major, public domain).
+- App store (Software with Flatpak and Flathub), LibreOffice (Writer, Calc, Impress, Draw), and WhatsApp and Gmail as app windows.
 
 ## Planned
-- 1.1: custom GTK/shell theme polish, boot splash (Plymouth) and GRUB theme.
-- 1.2: persistence option for USB, more language toolchains from the welcome app.
+- Custom GTK/shell theme polish and a GRUB theme.
+- Persistence option for USB, more language toolchains from the welcome app.

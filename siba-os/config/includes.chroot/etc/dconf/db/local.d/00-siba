@@ -29,7 +29,7 @@ tap-to-click=true
 
 [org/gnome/shell]
 enabled-extensions=['dash-to-dock@micxgx.gmail.com','appindicatorsupport@rgcjonas.gmail.com']
-favorite-apps=['firefox-esr.desktop','code.desktop','org.gnome.Terminal.desktop','org.gnome.Nautilus.desktop','org.gnome.TextEditor.desktop','siba-welcome.desktop','org.gnome.Settings.desktop']
+favorite-apps=['firefox-esr.desktop','code.desktop','org.gnome.Terminal.desktop','org.gnome.Nautilus.desktop','siba-whatsapp.desktop','siba-gmail.desktop','org.gnome.Software.desktop','libreoffice-writer.desktop','siba-welcome.desktop','org.gnome.Settings.desktop']
 
 [org/gnome/shell/extensions/dash-to-dock]
 dock-position='BOTTOM'

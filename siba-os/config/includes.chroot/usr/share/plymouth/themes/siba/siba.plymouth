@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Siba OS
+Description=Siba OS boot animation. Built by Sorokhaibam Nungsiba Singh.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/siba
+ScriptFile=/usr/share/plymouth/themes/siba/siba.script
